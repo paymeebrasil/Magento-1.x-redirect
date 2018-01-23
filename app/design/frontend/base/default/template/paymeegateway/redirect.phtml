@@ -1,0 +1,56 @@
+<?php
+$_order = new Mage_Sales_Model_Order();
+$orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+$_order->loadByIncrementId($orderId);
+$customer = Mage::getSingleton('customer/session')->getCustomer();
+
+$xApiKey = Mage::getConfig()->getNode('default/payment/paymeegateway/paymee_x_api_key');
+$xApiToken = Mage::getConfig()->getNode('default/payment/paymeegateway/paymee_x_api_token');
+
+$defaultMaxAge = Mage::getConfig()->getNode('default/payment/paymeegateway/default_max_age');
+
+$payload = new \stdClass();
+$payload->shopper = new \stdClass();
+$payload->currency =  Mage::app()->getStore()->getCurrentCurrencyCode();
+$payload->amount = $_order->getBaseGrandTotal();
+$payload->referenceCode = $orderId;
+$payload->maxAge = (isset($defaultMaxAge) && is_numeric($defaultMaxAge)) ? $defaultMaxAge : 2880;
+$payload->callbackUrl = Mage::getBaseUrl() . '/paymeegateway/payment/response';
+$payload->shopper->email = $customer->getEmail();
+
+$stringPayload = json_encode($payload);
+
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://api.paymee.com.br/v1/checkout",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => $stringPayload,
+  CURLOPT_HTTPHEADER => array(
+    "Content-Type: application/json",
+    "x-api-key: " . $xApiKey,
+    "x-api-token: ". $xApiToken
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "Erro em solicitar o pagamento, entre em contato com o administrador do sistema e informe o erro #:" . $err;
+} else {
+  $responsePayMee = json_decode($response);
+  if($responsePayMee->status !== 0) {
+    echo "Erro em solicitar o pagamento, entre em contato com o administrador e infome o erro PayMee #" . $responsePayMee->status;
+  } else {
+    echo "<h1>Você será redirecionado para o gateway da <strong>PayMee Brasil<strong/></h1><br><a href='". $responsePayMee->response[0]->transactionURL . 
+    "'>Clique aqui</a> para continuar ou aguarde <div id='seconds'></div><script>var left = 15;setTimeout(function(){window.location = '" . $responsePayMee->response[0]->transactionURL . "';}, 15000);setInterval(function(){if(left >= 0) {document.getElementById('seconds').innerText = left-- + ' segundos...'}}, 1000);</script>";
+  }
+}
+?>
