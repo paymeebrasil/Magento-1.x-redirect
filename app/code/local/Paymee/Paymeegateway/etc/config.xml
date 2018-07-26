@@ -28,7 +28,7 @@
         <model>paymeegateway/standard</model>
         <active>1</active>
         <paymee_default_max_age>2880</paymee_default_max_age>
-        <title>PayMee Brasil - Pague à vista por transferência ou depósito bancário.</title>
+        <title>Débito Bancário</title>
         <order_status>pending</order_status>
         <payment_action>sale</payment_action>
         <allowspecific>0</allowspecific>
