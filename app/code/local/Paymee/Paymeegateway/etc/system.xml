@@ -30,7 +30,7 @@
             </title>
             <paymee_x_api_key translate="label">
               <label>x-api-key</label>
-              <comment>Informe sua x-api-key, caso não possua acesse o seu <![CDATA[<a href="https://www2.paymee.com.br/login" target="_blank">merchant panel</a>.]]></comment>
+              <comment>Informe sua x-api-key, caso não possua acesse o seu <![CDATA[<a href="https://www2.paymee.com.br/merchants/API" target="_blank">merchant panel</a>.]]></comment>
               <frontend_type>text</frontend_type>
               <sort_order>30</sort_order>
               <show_in_default>1</show_in_default>
@@ -39,7 +39,7 @@
             </paymee_x_api_key>
             <paymee_x_api_token translate="label">
               <label>x-api-token</label>
-              <comment>Informe sua x-api-token, caso não possua acesse o seu <![CDATA[<a href="https://www2.paymee.com.br/login" target="_blank">merchant panel</a>.]]></comment>
+              <comment>Informe sua x-api-token, caso não possua acesse o seu <![CDATA[<a href="https://www2.paymee.com.br/merchants/API" target="_blank">merchant panel</a>.]]></comment>
               <frontend_type>text</frontend_type>
               <sort_order>40</sort_order>
               <show_in_default>1</show_in_default>
