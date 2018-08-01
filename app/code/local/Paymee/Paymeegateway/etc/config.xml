@@ -46,5 +46,12 @@
         </args>
       </paymeegateway>
     </routers>
+    <layout>
+            <updates>
+                <ems_pay>
+                    <file>paymeegateway.xml</file>
+                </ems_pay>
+            </updates>
+        </layout>
   </frontend>
 </config>
