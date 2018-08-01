@@ -52,7 +52,7 @@
         <?php $oneMethod = $_code; ?>
     <?php endif; ?>
       
-        <label for="p_method_<?php echo $_code ?>"><?php if($_code  == "paymeegateway" ?><img style="margin-right:7px!important;margin-left:7px!important;vertical-align: middle;" src="https://cdn.paymee.com.br/cdn/bancos_logo.png?v=1" alt="<?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?>" /><?php endif; ?> <?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+        <label for="p_method_<?php echo $_code ?>"><?php if($_code  == "paymeegateway") ?><img style="margin-right:7px!important;margin-left:7px!important;vertical-align: middle;" src="https://cdn.paymee.com.br/cdn/bancos_logo.png?v=1" alt="<?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?>" /><?php endif; ?> <?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
         
     </dt>
     <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
