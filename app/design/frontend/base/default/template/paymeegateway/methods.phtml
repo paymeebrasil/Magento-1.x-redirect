@@ -51,7 +51,7 @@
         <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
         <?php $oneMethod = $_code; ?>
     <?php endif; ?>
-        <?php if($this->getSelectedMethodCode()==$_code) ?>
+        <?php if("paymeegateway"===$_code) ?>
             <label for="p_method_<?php echo $_code ?>"><img style="margin-left:7px!important;vertical-align: middle;" src="https://cdn.paymee.com.br/cdn/bancos_logo.png?v=1" alt="<?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?>" /> <?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
         <?php endif; ?>
     </dt>
